@@ -23,37 +23,29 @@ public class WriteXMLFile {
             DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 
-            // root elements
             Document doc = docBuilder.newDocument();
             Element rootElement = doc.createElement("test");
             doc.appendChild(rootElement);
 
-            // firstname elements
             Element firstname = doc.createElement("name");
             firstname.appendChild(doc.createTextNode("yandex"));
             rootElement.appendChild(firstname);
 
-            // lastname elements
             Element lastname = doc.createElement("date");
             Date date = new Date();
             lastname.appendChild(doc.createTextNode(String.valueOf(date)));
             rootElement.appendChild(lastname);
 
-            // nickname elements
             Element nickname = doc.createElement("result");
             nickname.appendChild(doc.createTextNode(res));
             rootElement.appendChild(nickname);
 
-
-            // write the content into xml file
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource source = new DOMSource(doc);
             String fileName = "result_"+String.valueOf(date).replace(" ", "_").replace(":", "-")+".xml";
             StreamResult result = new StreamResult(new File("C:\\Users\\Aslan\\IdeaProjects\\YandexTest\\src\\main\\java\\results\\"+fileName));
 
-            // Output to console for testing
-            // StreamResult result = new StreamResult(System.out);
 
             transformer.transform(source, result);
 
